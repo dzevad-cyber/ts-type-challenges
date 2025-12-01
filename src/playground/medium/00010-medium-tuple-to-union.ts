@@ -20,15 +20,18 @@
 
 /* _____________ Your Code Here _____________ */
 
-type TupleToUnion<T> = any
+type TupleToUnion<T extends unknown[]> = T[number];
+
+type __ = TupleToUnion<[123, '456', true]>;
+//    ^?
 
 /* _____________ Test Cases _____________ */
-import type { Equal, Expect } from '@type-challenges/utils'
+import type { Equal, Expect } from '@type-challenges/utils';
 
 type cases = [
   Expect<Equal<TupleToUnion<[123, '456', true]>, 123 | '456' | true>>,
-  Expect<Equal<TupleToUnion<[123]>, 123>>,
-]
+  Expect<Equal<TupleToUnion<[123]>, 123>>
+];
 
 /* _____________ Further Steps _____________ */
 /*
